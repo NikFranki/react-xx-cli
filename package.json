@@ -1,0 +1,15 @@
+{
+    "name": "react-xx-cli",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"testing from react-xx-cli\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "lerna": "^5.1.4"
+    }
+}

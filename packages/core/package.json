@@ -1,0 +1,29 @@
+{
+    "name": "@react-xx-cli/core",
+    "version": "1.0.0",
+    "description": "> TODO: description",
+    "author": "franki <8024ldbryant@gmail.com>",
+    "homepage": "",
+    "license": "ISC",
+    "main": "lib/core.js",
+    "bin": {
+        "react-xx-cli": "bin/index.js"
+    },
+    "directories": {
+        "lib": "lib",
+        "test": "__tests__"
+    },
+    "files": [
+        "lib"
+    ],
+    "scripts": {
+        "test": "echo \"testing from @react-xx-cli/core\""
+    },
+    "dependencies": {
+        "@react-xx-cli/utils": "^1.0.0"
+    },
+    "gitHead": "",
+    "publishConfig": {
+        "access": "public"
+    }
+}
