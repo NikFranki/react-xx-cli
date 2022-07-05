@@ -20,7 +20,7 @@
         "test": "echo \"testing from @react-xx-cli/core\""
     },
     "dependencies": {
-        "@react-xx-cli/utils": "^1.0.1"
+        "@react-xx-cli/utils": "file:../utils"
     },
     "gitHead": "",
     "publishConfig": {
