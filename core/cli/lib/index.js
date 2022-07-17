@@ -16,6 +16,7 @@ function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
+        checkRoot();
     } catch (error) {
         log.error(error.message);
     }
@@ -33,4 +34,9 @@ function checkNodeVersion(params) {
     if (!semver.gte(currentVersion, lowestVersion)) {
         throw new Error(`react-xx-cli 需要安装 ${lowestVersion} 版本以上的 Node.js`);
     }
+}
+
+function checkRoot(params) {
+    const rootCheck = require('root-check');
+    rootCheck();
 }
