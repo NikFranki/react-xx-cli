@@ -23,6 +23,7 @@
         "@react-xx-cli/log": "file:../../utils/log",
         "@react-xx-cli/utils": "file:../../utils/utils",
         "colors": "^1.4.0",
+        "dotenv": "^16.0.1",
         "import-local": "^3.1.0",
         "minimist": "^1.2.6",
         "npmlog": "^6.0.2",
