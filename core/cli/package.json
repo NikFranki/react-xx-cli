@@ -5,7 +5,7 @@
     "author": "franki <8024ldbryant@gmail.com>",
     "homepage": "",
     "license": "ISC",
-    "main": "lib/core.js",
+    "main": "lib/index.js",
     "bin": {
         "react-xx-cli": "bin/index.js"
     },
@@ -20,7 +20,12 @@
         "test": "echo \"testing from @react-xx-cli/core\""
     },
     "dependencies": {
-        "@react-xx-cli/utils": "file:../utils"
+        "@react-xx-cli/log": "file:../../utils/log",
+        "@react-xx-cli/utils": "file:../../utils/utils",
+        "colors": "^1.4.0",
+        "import-local": "^3.1.0",
+        "npmlog": "^6.0.2",
+        "semver": "^7.3.7"
     },
     "gitHead": "",
     "publishConfig": {
