@@ -19,5 +19,8 @@
     "gitHead": "",
     "publishConfig": {
         "access": "public"
+    },
+    "dependencies": {
+        "minimist": "^1.2.6"
     }
 }

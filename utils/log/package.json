@@ -30,6 +30,7 @@
         "url": "https://github.com/NikFranki/react-xx-cli/issues"
     },
     "dependencies": {
+        "minimist": "^1.2.6",
         "npmlog": "^6.0.2"
     }
 }

@@ -6,6 +6,7 @@ const semver = require('semver');
 const colors = require('colors/safe');
 const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
+const minimist = require('minimist');
 
 // require 可以加载的文件类型是 .js/.json/.node 如果是其他后缀的文件，一律按照加载 js 文件的方式去解析，解析不了就报错
 // .js -> module.exports exports
@@ -14,12 +15,16 @@ const log = require('@react-xx-cli/log');
 const pkg = require('../package.json');
 const constant = require('./const');
 
+let args;
+
 function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
         checkRoot();
         checkUserHome();
+        checkInputArgs();
+        log.verbose('test', 'verbose...');
     } catch (error) {
         log.error(error.message);
     }
@@ -48,4 +53,14 @@ function checkUserHome() {
     if (!userHome || !pathExists(userHome)) {
         throw new Error(`当前登录用户 ${colors.red(userHome)} 不存在`);
     }
+}
+
+function checkInputArgs() {
+    args = minimist(process.argv.slice(2));
+    checkArgs(args);
+}
+
+function checkArgs() {
+    process.env.LOG_LEVEL = args.debug ? 'verbose' : 'info';
+    log.level = process.env.LOG_LEVEL;
 }
