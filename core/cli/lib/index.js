@@ -18,7 +18,7 @@ const constant = require('./const');
 
 let args;
 
-function core() {
+async function core() {
     try {
         checkPkgVersion();
         checkNodeVersion();
@@ -26,7 +26,7 @@ function core() {
         checkUserHome();
         checkInputArgs();
         checkEnv();
-        log.verbose('test', 'verbose...');
+        await checkGrobalUpdate();
     } catch (error) {
         log.error(error.message);
     }
@@ -76,7 +76,7 @@ function checkEnv() {
         });
     }
     createDefaultConfig();
-    log.verbose('环境变量', process.env.CLI_HOME_PATH);
+    // log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
 function createDefaultConfig() {
@@ -89,4 +89,16 @@ function createDefaultConfig() {
         cliConfig['CLI_HOME'] = path.join(userHome, constant.DEFAULT_CLI_HOME);
     }
     process.env.CLI_HOME_PATH = cliConfig['CLI_HOME'];
+}
+
+async function checkGrobalUpdate() {
+    // 获取当前版本号和模块名
+    const currentVersion = pkg.version;
+    const npmName = pkg.name;
+    // 调用npm API，获取所有版本号
+    const { getNpmInfo } = require('@react-xx-cli/get-npm-info');
+    const data = await getNpmInfo(npmName);
+    console.log(data);
+    // 提取所有版本号，对比哪些版本号大于当前版本号
+    // 获取最新版本号，提醒用户更新到当前版本
 }

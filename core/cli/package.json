@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@react-xx-cli/log": "file:../../utils/log",
-        "@react-xx-cli/utils": "file:../../utils/utils",
+        "@react-xx-cli/get-npm-info": "file:../../utils/get-npm-info",
         "colors": "^1.4.0",
         "dotenv": "^16.0.1",
         "import-local": "^3.1.0",
