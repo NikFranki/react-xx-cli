@@ -14,6 +14,7 @@ const { program } = require('commander');
 // .js -> module.exports exports
 // .json -> JSON.parse
 const log = require('@react-xx-cli/log');
+const init = require('@react-xx-cli/init');
 const pkg = require('../package.json');
 const constant = require('./const');
 
@@ -111,6 +112,11 @@ function registerCommand() {
         .version(pkg.version)
         .option('-d, --debug', '是否开启调试模式', false);
 
+    // 注册 init 命令
+    program.command('init [projectName]')
+        .option('-f, --force', '是否要强制初始化项目')
+        .action(init);
+
     // 开启 debug 模式
     program.on('option:debug', function () {
         process.env.LOG_LEVEL = this.opts().debug ? 'verbose' : 'info';
@@ -126,9 +132,9 @@ function registerCommand() {
         }
     });
 
+    program.parse(process.argv);
+
     if (program.args && program.args.length < 1) {
         program.outputHelp();
     }
-
-    program.parse(process.argv);
 }
