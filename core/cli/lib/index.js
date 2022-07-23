@@ -8,6 +8,7 @@ const colors = require('colors/safe');
 const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
 const minimist = require('minimist');
+const { program } = require('commander');
 
 // require 可以加载的文件类型是 .js/.json/.node 如果是其他后缀的文件，一律按照加载 js 文件的方式去解析，解析不了就报错
 // .js -> module.exports exports
@@ -24,9 +25,10 @@ async function core() {
         checkNodeVersion();
         checkRoot();
         checkUserHome();
-        checkInputArgs();
+        // checkInputArgs();
         checkEnv();
         await checkGrobalUpdate();
+        registerCommand();
     } catch (error) {
         log.error(error.message);
     }
@@ -96,8 +98,37 @@ async function checkGrobalUpdate() {
     const npmName = pkg.name;
     const { getNpmSemverVersion } = require('@react-xx-cli/get-npm-info');
     const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
-    if (lastVersion && semver.gte(lastVersion, currentVersion)) {
+    if (lastVersion && semver.gt(lastVersion, currentVersion)) {
         log.warn(`更新提示：${colors.yellow(`请手动更新 ${npmName}，当前版本 ${currentVersion} 最新版本 ${lastVersion} 
                 更新命令 npm -g i ${npmName}`)}`);
     }
+}
+
+function registerCommand() {
+    program
+        .name(Object.keys(pkg.bin)[0])
+        .usage('<command> [options]')
+        .version(pkg.version)
+        .option('-d, --debug', '是否开启调试模式', false);
+
+    // 开启 debug 模式
+    program.on('option:debug', function () {
+        process.env.LOG_LEVEL = this.opts().debug ? 'verbose' : 'info';
+        log.level = process.env.LOG_LEVEL;
+    });
+
+    // 监听位置命令
+    program.on('command:*', function (obj) {
+        const availableCommands = program.commands.map(cmd => cmd.name());
+        console.log(colors.red('未知命令: ' + obj[0]));
+        if (availableCommands.length > 0) {
+            console.log('已知命令: ' + availableCommands.join(','));
+        }
+    });
+
+    if (program.args && program.args.length < 1) {
+        program.outputHelp();
+    }
+
+    program.parse(process.argv);
 }

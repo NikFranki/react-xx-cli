@@ -20,9 +20,10 @@
         "test": "echo \"testing from @react-xx-cli/core\""
     },
     "dependencies": {
-        "@react-xx-cli/log": "file:../../utils/log",
         "@react-xx-cli/get-npm-info": "file:../../utils/get-npm-info",
+        "@react-xx-cli/log": "file:../../utils/log",
         "colors": "^1.4.0",
+        "commander": "^9.4.0",
         "dotenv": "^16.0.1",
         "import-local": "^3.1.0",
         "minimist": "^1.2.6",
