@@ -92,13 +92,12 @@ function createDefaultConfig() {
 }
 
 async function checkGrobalUpdate() {
-    // 获取当前版本号和模块名
     const currentVersion = pkg.version;
     const npmName = pkg.name;
-    // 调用npm API，获取所有版本号
-    const { getNpmInfo } = require('@react-xx-cli/get-npm-info');
-    const data = await getNpmInfo(npmName);
-    console.log(data);
-    // 提取所有版本号，对比哪些版本号大于当前版本号
-    // 获取最新版本号，提醒用户更新到当前版本
+    const { getNpmSemverVersion } = require('@react-xx-cli/get-npm-info');
+    const lastVersion = await getNpmSemverVersion(currentVersion, npmName);
+    if (lastVersion && semver.gte(lastVersion, currentVersion)) {
+        log.warn(`更新提示：${colors.yellow(`请手动更新 ${npmName}，当前版本 ${currentVersion} 最新版本 ${lastVersion} 
+                更新命令 npm -g i ${npmName}`)}`);
+    }
 }
